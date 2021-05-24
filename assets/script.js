@@ -1,11 +1,11 @@
 let $container = $(".container");
+let $btn = $('#btn');
+let $input = $('#input');
+// let $time = $('#time');
+
 
 let today = moment();
 $("#currentDay").text(today.format("MMM Do, YYYY"));
-
-let time = moment();
-
-localStorage.key
 
 let timeSlots = [
     '8AM',
@@ -22,14 +22,35 @@ let timeSlots = [
 
 
 for (let i = 0; i < timeSlots.length; i++) {
-    let timeEl = $('<div class="col-2">');
+    const timeEl = $('<div class="col-2" id="time">');
     timeEl.text(timeSlots[i]).addClass('col-1', 'hour', 'row' ).css('padding', 50);
 
-    let inputEl = $('<textarea class="col-8 input-group">');
+    const inputEl = $('<textarea name="input" class="col-8 input-group" id="input">');
     inputEl.addClass("past")
 
-    let saveBtn = $('<button type="button" class="btn btn-success col-2">save</button>');
-        saveBtn.onclick(console.log("hi"));
+    const saveBtn = $('<button type="button" class="btn btn-success col-2" id="btn">save</button>');
     $container.append(timeEl,inputEl,saveBtn).addClass("row align-items-center");
 }
 
+
+
+function saveInput() {
+    let inputSv ={
+        input: $input.value.trim()
+    };
+    localStorage.setItem("inputSv", JSON.stringify(inputSv));
+}
+function renderInput(){
+    let inputRen = JSON.parse(localStorage.getItem("inputSv"));
+    if (inputRen !== null) {
+        $input.innerHTML = inputRen.input;
+    } else {
+        return;
+    }
+}
+
+$btn.click(function (event){
+    event.preventDefault();
+    saveInput();
+    renderInput();
+});

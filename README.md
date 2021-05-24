@@ -11,4 +11,4 @@ I got stuck on saving the input to the local storage
 <br>
 https://izaaaqk.github.io/Homework5/
 <br>
-![this is how the applooks like](./assets/Untitled presentation.jpg)
+![this is how the applooks like](./assets/image.jpg)
